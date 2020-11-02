@@ -14,11 +14,11 @@
 }
 
 body {
-    background-color: #1e272e !important;
+    background-color: #292d31 !important;
 }
 
 .custom-control-label {
-    color: whitesmoke;
+    color: white;
 }
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
@@ -32,7 +32,7 @@ body {
 }
 
 .sidebar {
-    background-color: #303d47 !important;
+    background-color: #343a40 !important;
     height: 100%;
     width: 300px;
     display: block;
@@ -41,9 +41,16 @@ body {
 
 .friendslist {
     height: calc(100vh - 60px);
-    overflow-y: scroll;
+    overflow: hidden;
 }
 
 .character-panel {
     height: 70px;
+    background-color: #2d3238;
+}
+
+.list {
+    overflow-y: scroll;
+    display: block;
+    height: calc(100vh - 100px)
 }

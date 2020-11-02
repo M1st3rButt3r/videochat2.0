@@ -66,11 +66,22 @@ router.post('/', async (req, res) => {
         database.connection.query(sql, function(err, result) {
             if(err) throw err
         })
-        res.redirect('/signin')
     } catch(err) {
         if(err) throw err
         res.redirect('/signup')
     }
+
+    var sql = 'SELECT uuid FROM user WHERE name="'+req.body.name+'" AND tag="'+tag+'"'
+    database.connection.query(sql, (err, result) => {
+        if(err) throw err
+        
+        //set cookie and redirect
+        const user = { id: result[0].uuid}
+        const accessToken = jwt.sign(user, process.env.AUTHORIZATION_TOKEN)
+        res.cookie('token', accessToken)
+        res.redirect('/')
+        return
+    })
 })
 
 module.exports = router
