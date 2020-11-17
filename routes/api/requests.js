@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
         var jsonarray = []
 
         for (let i = 0; i < result.length; i++) {
-            jsonarray.push(result[i].uuidb)
+            jsonarray.push(result[i].uuida)
         }
 
         var json = JSON.parse(JSON.stringify(jsonarray))

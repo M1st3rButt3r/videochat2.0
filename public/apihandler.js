@@ -132,10 +132,13 @@ function generateRequestedListActionButtons()
 }
 
 //returns the action button for the incoming requests list
-function generateBlocksListActionButtons()
+function generateBlocksListActionButtons(id)
 {
     var actionsEntry = document.createElement('td')
     var dismissButton = document.createElement('button')
+    dismissButton.addEventListener('click', () =>{
+        
+    })
     dismissButton.innerHTML='<i class="fas fa-times"></i>'
     actionsEntry.appendChild(dismissButton)
 
@@ -143,8 +146,23 @@ function generateBlocksListActionButtons()
 }
 
 function block(id) {
-    console.log('Block '+id)
-    reloadAllLists()
+    fetch(apiUrl +'block?uuid='+id, {credentials: 'include'})
+    .then(()=> {
+        reloadAllLists()
+    })
+    .catch((err)=>{
+        if(err) throw err
+    })
+}
+
+function unblock(id) {
+    fetch(apiUrl +'unblock?uuid='+id, {credentials: 'include'})
+    .then(()=> {
+        reloadAllLists()
+    })
+    .catch((err)=>{
+        if(err) throw err
+    })
 }
 
 function call(id) {
@@ -152,12 +170,18 @@ function call(id) {
 }
 
 function deleteRelation(id) {
-    console.log('Delete Relation '+id)
-    reloadAllLists()
+    fetch(apiUrl +'deleteRelation?uuid='+id, {credentials: 'include'})
+    .then(()=> {
+        reloadAllLists()
+    })
+    .catch((err)=>{
+        if(err) throw err
+    })
 }
 
-function acceptRequest(id)
+function request(id)
 {
     console.log('Accept Request '+id)
     reloadAllLists()
 }
+
