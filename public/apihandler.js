@@ -147,7 +147,7 @@ function generateBlocksListActionButtons(id)
 
 function block(id) {
     fetch(apiUrl +'block?uuid='+id, {credentials: 'include'})
-    .then((x)=> {
+    .then(()=> {
         reloadAllLists()
     })
     .catch((err)=>{
@@ -157,7 +157,7 @@ function block(id) {
 
 function unblock(id) {
     fetch(apiUrl +'unblock?uuid='+id, {credentials: 'include'})
-    .then((x)=> {
+    .then(()=> {
         reloadAllLists()
     })
     .catch((err)=>{
@@ -170,11 +170,16 @@ function call(id) {
 }
 
 function deleteRelation(id) {
-    console.log('Delete Relation '+id)
-    reloadAllLists()
+    fetch(apiUrl +'deleteRelation?uuid='+id, {credentials: 'include'})
+    .then(()=> {
+        reloadAllLists()
+    })
+    .catch((err)=>{
+        if(err) throw err
+    })
 }
 
-function acceptRequest(id)
+function request(id)
 {
     console.log('Accept Request '+id)
     reloadAllLists()

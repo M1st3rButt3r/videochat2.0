@@ -4,11 +4,9 @@ var database = require('../../includes/database')
 var url = require('url');
 
 router.get('/', (req, res) => {
-    console.log('moin')
     //parse uuid
     var uuid = url.parse(req.url, true).query.uuid;
     if(!uuid) {
-        console.log('no uuid')
         res.header('Access-Control-Allow-Origin', "http://localhost:3000").header('Access-Control-Allow-Credentials', true).sendStatus(404)
         return
     }
@@ -32,13 +30,10 @@ router.get('/', (req, res) => {
                     var sql = 'SELECT * FROM relations WHERE (uuida="'+req.user.id+'" AND uuidb="'+uuid+'") OR (uuidb="'+req.user.id+'" AND uuida="'+uuid+'")'
                     database.connection.query(sql, (err, result) => {
                         if(err) throw err
-                            console.log(result.length)
                         if(result.length >= 1) {
                             //Delete relation
-                            console.log('delete Relation')
                             var sql = 'DELETE FROM relations WHERE (uuida="'+req.user.id+'" AND uuidb="'+uuid+'") OR (uuidb="'+req.user.id+'" AND uuida="'+uuid+'")'
                             database.connection.query(sql, (err, result) => {
-                                console.log(result)
                                 if(err) throw err
                             })
                         }
