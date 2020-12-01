@@ -13,10 +13,10 @@
   <link rel="stylesheet" type="text/css" href="./style.css">
 
   <!--Bootstrap-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+  <link href="/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
+  <!--Menu Friends-->
   <div class="menu" id='friendmenu'>
     <ul class="menu-options">
       <li class="menu-option" onclick="call(menuData)">Call</li>
@@ -25,6 +25,7 @@
     </ul>
   </div>
 
+  <!--Menu Requests-->
   <div class="menu" id='requestmenu'>
     <ul class="menu-options">
       <li class="menu-option" onclick="acceptRequest(menuData)">Accept</li>
@@ -35,18 +36,23 @@
   
   <div class="sidebar">
     <div class="listview">
+      <!--Tab Buttons-->
       <ul class="nav nav-pills nav-fill">
         <li class="nav-item">
             <a href="#friends" class="nav-link active" data-toggle="tab">Friends</a>
         </li>
         <li class="nav-item">
+          <a href="#groups" class="nav-link" data-toggle="tab">Groups</a>
+      </li>
+        <li class="nav-item">
             <a href="#pending" class="nav-link" data-toggle="tab">Pending</a>
         </li>
-        <li class="nav-item">
-            <a href="#blocks" class="nav-link" data-toggle="tab">Blocks</a>
-        </li>
       </ul>
+
+      <!--tabs-->
       <div class="tab-content">
+
+        <!--Friends Tab-->
         <div class="tab-pane show active" id="friends">
           <div class="list">
             <table class="table table-dark">
@@ -55,8 +61,17 @@
             </table>
           </div>
         </div>
+
+        <!--Groups Tab-->
+        <div class="tab-pane" id="groups">
+          <p>Preview Feature</p>
+        </div>
+
+        <!--pending Tab-->
         <div class="tab-pane" id="pending">
           <div class="list">
+            <input type="text" class="form-control friendsinput" id="requestinput">
+            <button class="btn btn-outline-primary friendsbutton" id="requestbutton"><i class="fas fa-plus"></i></button>
             <table class="table table-dark">
               <tr>
                 <th>Incoming</th>
@@ -73,16 +88,11 @@
             </table>
           </div>
         </div>
-        <div class="tab-pane" id="blocks">
-          <div class="list">
-            <table class="table table-dark">
-              <tbody id="blockslist" class="requestslist">
-              </tbody>
-            </table>
-          </div>
-        </div>
+      
       </div>
     </div>
+
+    <!--User Panel-->
     <div class="user-panel">
       <p id="name"></p>
       <p id="tag">#</p>
@@ -90,30 +100,67 @@
         <i class="fas fa-cog"></i>
       </button>
     </div>
+
   </div>
 
   <!-- Settings Modal -->
   <div class="modal fade" id="settings" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Settings</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl settings-modal">
+      <div class="modal-content">
+
+        <!--Modal Header-->
+        <div class="modal-header">
+          <h5 class="modal-title" id="">Settings</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="modal-close" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <!--Modal Body-->
+        <div class="modal-body">
+          <div class="row">
+
+            <!--Menu Button-->
+            <div class="col-3">
+              <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#profile" role="tab" aria-selected="true">Profile</a>
+                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#security" role="tab" aria-selected="false">Security</a>
+              </div>
             </div>
-            <div class="modal-body">
-                <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="customSwitch1">
-                    <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
-                </div>                
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Save changes</button>
+
+            <!--Tabs-->
+            <div class="col-9">
+              <div class="tab-content" id="v-pills-tabContent">
+
+                <!--Profile Tab-->
+                <div class="tab-pane show active" id="profile" role="tabpanel">
+                  <h4>Profile</h4>
+                  <div class="settings-user-panel">
+                    <p id="name">M1st3rButt3r</p>
+                    <p id="tag">#1000</p>
+                    <button class="btn btn-outline-success">Edit</button>
+                  </div>
+                  <button class="btn btn-outline-warning" disabled>Change Password</button>
+                  <a class="btn btn-outline-danger" href="./logout">Logout</a>
+                </div>
+
+                <!--Security Tab-->
+                <div class="tab-pane" id="security" role="tabpanel">
+                  <h4>Security</h4>
+                  <h5>Privacy</h5>
+                  <h5>Blocks</h5>
+                  <table class="table table-dark">
+                    <tbody id="blockslist" class="requestslist">
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
   </div>
 
   <script src='./contextmenu.js'></script>
@@ -121,8 +168,8 @@
   <script src="./index.js"></script>
 
   <!--Bootstrap-->
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+  <script src="/js/jquery.js"></script>
+  <!--<script src="/js/popper.js"></script>-->
+  <script src="/js/bootstrap.js"></script>
 </body>
 </html>

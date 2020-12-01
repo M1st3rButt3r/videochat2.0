@@ -90,9 +90,6 @@ async function createTableEntry(id, actionButtonsFunction, menu)
 
         return entry
     })
-
-
-
 }
 
 //returns the action button for the friends list
@@ -100,6 +97,9 @@ function generateFriendsListActionButtons(id)
 {
     var actionsEntry = document.createElement('td')
     var button = document.createElement('button')
+    button.addEventListener('click', ()=>{
+        call(id);
+    });
     button.innerHTML='<i class="fas fa-phone"></i>'
     actionsEntry.appendChild(button)
 
@@ -112,6 +112,12 @@ function generateRequestsListActionButtons(id)
     var actionsEntry = document.createElement('td')
     var acceptButton = document.createElement('button')
     var dismissButton = document.createElement('button')
+    acceptButton.addEventListener('click', ()=> {
+        request(id);
+    });
+    dismissButton.addEventListener('click', ()=> {
+        deleteRelation(id);
+    });
     acceptButton.innerHTML='<i class="fas fa-check"></i>'
     dismissButton.innerHTML='<i class="fas fa-times"></i>'
     actionsEntry.appendChild(acceptButton)
@@ -183,9 +189,18 @@ function deleteRelation(id) {
     })
 }
 
-function request(id)
-{
+function request(id) {
     fetch(apiUrl +'request?uuid='+id, {credentials: 'include'})
+    .then(()=> {
+        reloadAllLists()
+    })
+    .catch((err)=>{
+        if(err) throw err
+    })
+}
+
+function requestWithName(name, tag) {
+    fetch(apiUrl +'request?name='+name+'&tag='+tag, {credentials: 'include'})
     .then(()=> {
         reloadAllLists()
     })

@@ -39,5 +39,9 @@ app.use('/signin', signin)
 app.use('/signup', signup)
 app.use('/logout', logout)
 app.use('/', index)
+app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
+app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
+app.use('/js', express.static(__dirname + '/node_modules/popper.js/dist'));
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
 app.listen(3000)
