@@ -53,6 +53,7 @@ router.post('/', (req, res) => {
              const user = { id: result[0].uuid}
              const accessToken = jwt.sign(user, process.env.AUTHORIZATION_TOKEN)
              res.cookie('token', accessToken)
+             res.cookie('uuid', result[0].uuid)
              res.redirect('/')
              return
          })

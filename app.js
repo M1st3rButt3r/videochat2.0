@@ -1,8 +1,12 @@
-require('dotenv').config()
-const express = require('express')
-const app = express()
-const jwt = require('jsonwebtoken')
-const cookieParser = require('cookie-parser')
+require('dotenv').config();
+const express = require('express');
+const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser');
+const database = require('./includes/database');
+
 
 //define routes
 const signin = require('./routes/signin')
@@ -35,13 +39,28 @@ app.use(function(req, res, next)
     })
 })
 
-app.use('/signin', signin)
-app.use('/signup', signup)
-app.use('/logout', logout)
-app.use('/', index)
+io.on('connection', (socket) => {
+
+    socket.on("ready", (uuid) => {
+        console.log("User "+uuid+" connected with "+ socket.id);
+        var sql = "INSERT INTO clients (uuid, socketid) VALUES ('"+uuid+"', '"+socket.id+"')"
+        database.connection.query(sql);
+    })
+
+    socket.on('disconnecting', () => {
+        console.log(socket.id+" disconnected");
+        var sql = "DELETE FROM clients WHERE socketid = '"+socket.id+"'"
+        database.connection.query(sql);
+      });
+});
+
+app.use('/signin', signin);
+app.use('/signup', signup);
+app.use('/logout', logout);
+app.use('/', index);
 app.use('/js', express.static(__dirname + '/node_modules/bootstrap/dist/js'));
 app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
 app.use('/js', express.static(__dirname + '/node_modules/popper.js/dist'));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
-app.listen(3000)
+server.listen(3000);
