@@ -5,7 +5,7 @@ Das Ziel des Projektes ist es ein P2P Videochat Tool zu entwickeln, welches ohne
 ## Tagebuch
 
 ### 16.02.21
-Ich habe im Moment noch einen Fehler in dem Call Code, denn ich verbinde mich mit dem anderen sobald eine Anruf kommt, von jemandem den ich angerufen habe, wenn ich allerdings zurückrufe, werde ich nicht verbunden, das lässt sich aber relativ leicht beheben, indem man die incomingCall (zukünftig Callback incoming Call wird anders verwendet) Methode erst aufruft, wenn man zurückgerufen hat.
+Ich habe im Moment noch einen Fehler in dem Call Code, denn ich verbinde mich mit dem anderen sobald eine Anruf kommt, von jemandem den ich angerufen habe, wenn ich allerdings zurückrufe, werde ich nicht verbunden, das lässt sich aber relativ leicht beheben. Ich habe das jetzt gelöst indem ich bei einem Anruf speichere wer mich anruft und sobald ich jemanden anrufe checke ob die Person mich schon angerufen hat, wenn ja dann verbinde ich mich auch gleich, sonst mache ich einen normalen Anruf, das ist zwar nicht optimal, aber funktioniert, und in anbetracht der verkürzten Zeit ist es zumindest zum Testen ok, in einem Endprodukt müsste man das überarbeiten.
 
 ### 09.02.21, 16.02.21
 Aktuell habe ich das Problem, das die PeerJS library nicht funktioniert, der Verbindungscode, sprich die IDs etc. werden richtig ziwschen den Clients hin und her geschickt, aber sobald man die PeerID des anderen für den Verbindungsaufbau verwendet gibt es keine weitere Reaktion. Das Problem war, das ich schon beim aufrufen der Seite die PeerID mit in die Datenbank geschickt habe, dann der PeerClient seine ID vom Server allerdings noch nicht bekommen hatte, und so der Wert falsch war. Das habe ich behoben indem ich die PeerID zu begin des Anrufens schicke, das klappt.
