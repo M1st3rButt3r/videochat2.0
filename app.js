@@ -58,6 +58,7 @@ app.use('/js', express.static(__dirname + '/node_modules/jquery/dist'));
 app.use('/js', express.static(__dirname + '/node_modules/popper.js/dist'));
 app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 
+//listen on port 3000
 server.listen(3000);
 
 //this for handling socket request, that means send data if the site is already loaded
