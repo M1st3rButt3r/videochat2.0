@@ -9,7 +9,7 @@ window.setInterval(function(){
     reloadAllLists().catch((err)=> {if(err) throw err});
 }, 1000);
 
-
+//reloads all lists with other people
 async function reloadAllLists()
 {
     loadRelationsList('friends', 'friendslist', generateFriendsListActionButtons, friendmenu);
@@ -18,12 +18,14 @@ async function reloadAllLists()
     loadRelationsList('blocks', 'blockslist', generateBlocksListActionButtons);
 }
 
+//setup of request button
 requestButton.addEventListener('click', () => {
     var user = requestInput.value.split('#');
     requestInput.value = '';
     requestWithName(user[0], user[1])
 });
 
+//gets a cookie
 function getCookie(cname) {
     var name = cname + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
